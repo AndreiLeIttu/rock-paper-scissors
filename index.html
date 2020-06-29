@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      let computerSelection,
+        playerSelection,
+        wonRound,
+        computerScore = 0,
+        playerScore = 0;
+      function computerPlay() {
+        let choice = ["Rock", "Paper", "Scissors"];
+        return choice[Math.floor(Math.random() * 10) % 3];
+      }
+      function game() {
+        for (let i = 1; i <= 5; i++) {
+          computerSelection = computerPlay();
+          playerSelection = prompt("What do you choose?");
+          playRound(playerSelection, computerSelection);
+          if (wonRound == 1)
+            console.log(
+              "The score is currently " +
+                ++playerScore +
+                " to " +
+                computerScore +
+                "."
+            );
+          else if (wonRound == 2)
+            console.log(
+              "The score is currently " +
+                playerScore +
+                " to " +
+                ++computerScore +
+                "."
+            );
+          else console.log("The score stays the same!");
+        }
+        function playRound(playerSelection, computerSelection) {
+          playerSelection = playerSelection.toLowerCase();
+          let firstString = playerSelection[0],
+            secondString = playerSelection.slice(1, playerSelection.length);
+          firstString = firstString.toUpperCase();
+          playerSelection = firstString + secondString;
+          if (playerSelection === computerSelection)
+            console.log("You tied!"), (wonRound = 0);
+          else {
+            if (
+              (playerSelection == "Rock" && computerSelection == "Scissors") ||
+              (playerSelection == "Paper" && computerSelection == "Rock") ||
+              (playerSelection == "Scissors" && computerSelection == "Paper!")
+            ) {
+              console.log(
+                "You won! " +
+                  playerSelection +
+                  " beats " +
+                  computerSelection +
+                  "!"
+              );
+              wonRound = 1;
+            } else {
+              console.log(
+                "You lost! " +
+                  playerSelection +
+                  " loses to " +
+                  computerSelection +
+                  "!"
+              );
+              wonRound = 2;
+            }
+          }
+        }
+        if (playerScore > computerScore)
+          console.log("Congrats! You've won this game!");
+        else if (playerScore < computerScore)
+          console.log("Sorry! You've lost this game, maybe try one more?");
+        else console.log("Oh! You tied! Would you like to play one more game?");
+      }
+      game();
+    </script>
+  </head>
+</html>
